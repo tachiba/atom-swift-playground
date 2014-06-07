@@ -1,0 +1,16 @@
+# See https://atom.io/docs/latest/creating-a-package#menus for more details
+'context-menu':
+  '.overlayer':
+      'Enable execute-as-swift': 'execute-as-swift:toggle'
+
+'menu': [
+  {
+    'label': 'Packages'
+    'submenu': [
+      'label': 'execute-as-swift'
+      'submenu': [
+        { 'label': 'Toggle', 'command': 'execute-as-swift:toggle' }
+      ]
+    ]
+  }
+]

@@ -1,0 +1,14 @@
+{
+  "name": "execute-as-swift",
+  "main": "./lib/execute-as-swift",
+  "version": "0.0.0",
+  "description": "A short description of your package",
+  "activationEvents": ["execute-as-swift:toggle"],
+  "repository": "https://github.com/atom/execute-as-swift",
+  "license": "MIT",
+  "engines": {
+    "atom": ">0.50.0"
+  },
+  "dependencies": {
+  }
+}

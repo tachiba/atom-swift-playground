@@ -1,14 +1,15 @@
 {
   "name": "execute-as-swift",
   "main": "./lib/execute-as-swift",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "description": "Execute the current file with Swift.",
-  "activationEvents": ["execute-as-swift:execute"],
+  "activationEvents": [
+    "execute-as-swift:execute"
+  ],
   "repository": "https://github.com/tachiba/atom-execute-as-swift",
   "license": "MIT",
   "engines": {
     "atom": ">0.50.0"
   },
-  "dependencies": {
-  }
+  "dependencies": {}
 }

@@ -1,5 +1,3 @@
 # execute-as-swift package
 
-A short description of your package.
-
-![A screenshot of your spankin' package](https://f.cloud.github.com/assets/69169/2290250/c35d867a-a017-11e3-86be-cd7c5bf3ff9b.gif)
+![A screenshot of execute-as-swift package](https://cloud.githubusercontent.com/assets/529660/3209808/8fc3f462-ee8b-11e3-8108-45cccba639e1.gif)

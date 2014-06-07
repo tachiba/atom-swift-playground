@@ -1,7 +1,7 @@
 {
   "name": "execute-as-swift",
   "main": "./lib/execute-as-swift",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "description": "Execute the current file with Swift.",
   "activationEvents": [
     "execute-as-swift:execute"

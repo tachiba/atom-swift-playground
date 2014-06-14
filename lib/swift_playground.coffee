@@ -6,7 +6,7 @@ module.exports =
     swift_path: '/Applications/Xcode6-Beta.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/swift'
 
   activate: ->
-    atom.workspaceView.command "execute-as-swift:execute", => @execute()
+    atom.workspaceView.command "swift-playground:execute", => @execute()
 
   execute: ->
     editor = atom.workspace.getActiveEditor()
@@ -20,7 +20,7 @@ module.exports =
     output_file_path = "#{atom.project.getPath()}/#{editor.getTitle()}.out"
 
     # evaluate swift
-    command = atom.config.get('execute-as-swift.swift_path')
+    command = atom.config.get('swift-playground.swift_path')
     args = ["-i", current_file_path]
     stdout = (output) => @write_and_open_file(output_file_path, output)
     stderr = stdout

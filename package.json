@@ -1,12 +1,12 @@
 {
-  "name": "execute-as-swift",
-  "main": "./lib/execute-as-swift",
+  "name": "swift-playground",
+  "main": "./lib/swift_playground",
   "version": "0.1.0",
   "description": "Execute the current file with Swift.",
   "activationEvents": [
-    "execute-as-swift:execute"
+    "swift-playground:execute"
   ],
-  "repository": "https://github.com/tachiba/atom-execute-as-swift",
+  "repository": "https://github.com/tachiba/atom-swift-playground",
   "license": "MIT",
   "engines": {
     "atom": ">0.50.0"

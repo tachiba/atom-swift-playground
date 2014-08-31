@@ -3,7 +3,7 @@ fs = require 'fs'
 
 module.exports =
   configDefaults:
-    swift_path: '/Applications/Xcode6-Beta.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/swift'
+    xcode_path: '/Applications/Xcode6-Beta.app'
 
   activate: ->
     atom.workspaceView.command "swift-playground:execute", => @execute()
@@ -20,8 +20,9 @@ module.exports =
     output_file_path = "#{atom.project.getPath()}/#{editor.getTitle()}.out"
 
     # evaluate swift
-    command = atom.config.get('swift-playground.swift_path')
-    args = ["-i", current_file_path]
+    xcode = atom.config.get('swift-playground.xcode_path')
+    command = "#{xcode}/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/swift"
+    args = ["-sdk", "#{xcode}/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.10.sdk", current_file_path]
     stdout = (output) => @write_and_open_file(output_file_path, output)
     stderr = stdout
     process = new BufferedProcess({command, args, stdout, stderr})
@@ -34,14 +35,10 @@ module.exports =
       else
         options = {
           split: 'right'
-
-          # TODO not working??
-          activatePane: false
         }
 
         activePane = atom.workspace.getActivePane()
         atom.workspace.open(path, options).done((newEditor)->
-          # options.activatePane seems not to work, so reactivate prev pane.
-          activePane.activate()
+            activePane.activate()
         )
     )

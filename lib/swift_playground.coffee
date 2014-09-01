@@ -11,12 +11,15 @@ module.exports =
     inputFilePath = "#{outputDir}/input.swift"
     outputFilePath = "#{outputDir}/Swift Output"
     fs.writeFile inputFilePath, atom.workspace.getActiveEditor().getText()
+    stdout = (output) =>
+      fs.writeFile outputFilePath, output, (error)->
+        throw error if error
+        activePane = atom.workspace.getActivePane()
+        atom.workspace.open(outputFilePath, {split: 'right'}).done (newEditor) -> activePane.activate()
+    stderr = stdout
     new BufferedProcess {
       command: "xcrun",
       args: ["swift", inputFilePath],
-      stdout: (output) =>
-        fs.writeFile outputFilePath, output, (error)->
-          throw error if error
-          activePane = atom.workspace.getActivePane()
-          atom.workspace.open(outputFilePath, {split: 'right'}).done (newEditor) -> activePane.activate()
+      stdout,
+      stderr
     }

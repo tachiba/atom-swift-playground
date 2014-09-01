@@ -15,7 +15,7 @@ module.exports =
       fs.writeFile outputFilePath, output, (error)->
         throw error if error
         activePane = atom.workspace.getActivePane()
-        atom.workspace.open(outputFilePath, {split: 'right'}).done (newEditor) -> activePane.activate()
+        atom.workspace.open(outputFilePath, {split: 'right', activatePane: no}).done (newEditor) -> activePane.activate()
     stderr = stdout
     new BufferedProcess {
       command: "xcrun",

@@ -1,2 +1,2 @@
-'.platform-darwin .editor, .platform-win32 .editor, .platform-linux .editor':
+'.platform-darwin .editor':
   'ctrl-shift-c': 'swift-playground:execute'

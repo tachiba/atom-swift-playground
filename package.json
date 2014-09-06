@@ -1,7 +1,7 @@
 {
   "name": "swift-playground",
   "main": "./lib/swift_playground",
-  "version": "0.1.1",
+  "version": "0.2.0",
   "description": "Execute the current file with Swift.",
   "activationEvents": [
     "swift-playground:execute"

@@ -2,46 +2,24 @@
 fs = require 'fs'
 
 module.exports =
-  configDefaults:
-    swift_path: '/Applications/Xcode6-Beta.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/swift'
-
   activate: ->
     atom.workspaceView.command "swift-playground:execute", => @execute()
 
   execute: ->
-    editor = atom.workspace.getActiveEditor()
-
-    # unsaved file returns undefined
-    current_file_path = editor.getPath()
-    return unless current_file_path
-    unless current_file_path.match(/\.swift$/)
-      return console.log('The file extention is not matched.')
-
-    output_file_path = "#{atom.project.getPath()}/#{editor.getTitle()}.out"
-
-    # evaluate swift
-    command = atom.config.get('swift-playground.swift_path')
-    args = ["-i", current_file_path]
-    stdout = (output) => @write_and_open_file(output_file_path, output)
-    stderr = stdout
-    process = new BufferedProcess({command, args, stdout, stderr})
-
-  write_and_open_file: (path, output)->
-    fs.writeFile(path, output, (err)->
-      if err
-        console.error(err)
-
-      else
-        options = {
-          split: 'right'
-
-          # TODO not working??
-          activatePane: false
-        }
-
+    outputDir = "#{atom.getConfigDirPath()}/.swift-playground"
+    fs.mkdir outputDir if not fs.existsSync outputDir
+    inputFilePath = "#{outputDir}/input.swift"
+    outputFilePath = "#{outputDir}/Swift Output"
+    fs.writeFile inputFilePath, atom.workspace.getActiveEditor().getText()
+    stdout = (output) =>
+      fs.writeFile outputFilePath, output, (error)->
+        throw error if error
         activePane = atom.workspace.getActivePane()
-        atom.workspace.open(path, options).done((newEditor)->
-          # options.activatePane seems not to work, so reactivate prev pane.
-          activePane.activate()
-        )
-    )
+        atom.workspace.open(outputFilePath, {split: 'right', activatePane: no}).done (newEditor) -> activePane.activate()
+    stderr = stdout
+    new BufferedProcess {
+      command: "xcrun",
+      args: ["swift", inputFilePath],
+      stdout,
+      stderr
+    }

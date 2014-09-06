@@ -1,0 +1,2 @@
+'.platform-darwin .editor':
+  'ctrl-alt-cmd-w': 'swift-playground:execute'
